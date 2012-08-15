@@ -1282,29 +1282,23 @@ end run</string>
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>import sys
-import pycurl
-import StringIO
 import json
+import base64
+from urllib import urlencode
+from urllib import urlopen
 
+# url request. json because it's really better than xml :P
 url_to_upload = "http://api.imgur.com/2/upload.json"
+api_key		  = "YOUR_KEY"
 
-for f in sys.argv[1:]:
-
-	b = StringIO.StringIO()
-	c = pycurl.Curl()
-	c.setopt(pycurl.URL, url_to_upload)
-	c.setopt(pycurl.WRITEFUNCTION, b.write)
-
-	values = [
-          ("key", "YOUR_KEY"),
-          ("image", (c.FORM_FILE, f))]
-
-	c.setopt(c.HTTPPOST, values)
-	c.perform()
-	c.close()
-
-	json_to_parse = b.getvalue()
-	json_object = json.loads(json_to_parse)
+for f in sys.argv[1:]:	
+	image	= open(f, 'rb')
+	image64 = base64.b64encode(image.read())
+	
+	values = {'key':api_key, 'image':image64}
+	data = urlencode(values)
+	json_string = urlopen(url_to_upload, data).read()
+	json_object = json.loads(json_string)
 
 print json_object['upload']['links']['original']</string>
 					<key>CheckedForUserDefaultShell</key>
@@ -1664,47 +1658,47 @@ print json_object['upload']['links']['original']</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>3215BF18-6D9E-4293-98FF-3E2FE4D78291</key>
-		<dict>
-			<key>from</key>
-			<string>9A260B57-87F2-4CCB-9B51-F724AEF9C61F - 9A260B57-87F2-4CCB-9B51-F724AEF9C61F</string>
-			<key>to</key>
-			<string>785579D9-7841-476B-9834-D6476CBFE334 - 785579D9-7841-476B-9834-D6476CBFE334</string>
-		</dict>
-		<key>36899C23-CD00-4973-97C6-34165D7225A4</key>
-		<dict>
-			<key>from</key>
-			<string>579DF3BF-2BC8-4007-A25F-4BED28A6BE25 - 579DF3BF-2BC8-4007-A25F-4BED28A6BE25</string>
-			<key>to</key>
-			<string>D700F83A-A998-4ED4-B3E1-4D2E38995D5D - D700F83A-A998-4ED4-B3E1-4D2E38995D5D</string>
-		</dict>
-		<key>52E94A3D-3A3F-4021-936E-4483D678087D</key>
-		<dict>
-			<key>from</key>
-			<string>785579D9-7841-476B-9834-D6476CBFE334 - 785579D9-7841-476B-9834-D6476CBFE334</string>
-			<key>to</key>
-			<string>579DF3BF-2BC8-4007-A25F-4BED28A6BE25 - 579DF3BF-2BC8-4007-A25F-4BED28A6BE25</string>
-		</dict>
-		<key>869AECB1-54F3-4BA1-9F5F-F48E083B9D7A</key>
-		<dict>
-			<key>from</key>
-			<string>D700F83A-A998-4ED4-B3E1-4D2E38995D5D - D700F83A-A998-4ED4-B3E1-4D2E38995D5D</string>
-			<key>to</key>
-			<string>EF5D184C-CD29-447E-9C6A-3F923223C4A8 - EF5D184C-CD29-447E-9C6A-3F923223C4A8</string>
-		</dict>
-		<key>87E955F8-A3B2-4CF5-8530-2B6789D95DA0</key>
+		<key>120A7A44-0167-4B58-BB47-55D00038A20A</key>
 		<dict>
 			<key>from</key>
 			<string>E6E3D66B-F278-4122-BF7D-3AA7CC0F55FD - E6E3D66B-F278-4122-BF7D-3AA7CC0F55FD</string>
 			<key>to</key>
 			<string>69EDD6E4-5EA6-42EC-98F0-3B0BF183C271 - 69EDD6E4-5EA6-42EC-98F0-3B0BF183C271</string>
 		</dict>
-		<key>C66B7C2D-A38A-43BD-89C1-421B1F14B231</key>
+		<key>1BC0820B-D5E9-4A4C-8A99-5840B5EFA927</key>
 		<dict>
 			<key>from</key>
 			<string>69EDD6E4-5EA6-42EC-98F0-3B0BF183C271 - 69EDD6E4-5EA6-42EC-98F0-3B0BF183C271</string>
 			<key>to</key>
 			<string>9A260B57-87F2-4CCB-9B51-F724AEF9C61F - 9A260B57-87F2-4CCB-9B51-F724AEF9C61F</string>
+		</dict>
+		<key>38D18003-066A-403A-9ED1-535AFA43B2B5</key>
+		<dict>
+			<key>from</key>
+			<string>785579D9-7841-476B-9834-D6476CBFE334 - 785579D9-7841-476B-9834-D6476CBFE334</string>
+			<key>to</key>
+			<string>579DF3BF-2BC8-4007-A25F-4BED28A6BE25 - 579DF3BF-2BC8-4007-A25F-4BED28A6BE25</string>
+		</dict>
+		<key>5A18E9B8-43C3-474A-BB02-A09F8750ECA8</key>
+		<dict>
+			<key>from</key>
+			<string>D700F83A-A998-4ED4-B3E1-4D2E38995D5D - D700F83A-A998-4ED4-B3E1-4D2E38995D5D</string>
+			<key>to</key>
+			<string>EF5D184C-CD29-447E-9C6A-3F923223C4A8 - EF5D184C-CD29-447E-9C6A-3F923223C4A8</string>
+		</dict>
+		<key>84A9CA22-82B6-4647-8DB2-F49F73805C5D</key>
+		<dict>
+			<key>from</key>
+			<string>579DF3BF-2BC8-4007-A25F-4BED28A6BE25 - 579DF3BF-2BC8-4007-A25F-4BED28A6BE25</string>
+			<key>to</key>
+			<string>D700F83A-A998-4ED4-B3E1-4D2E38995D5D - D700F83A-A998-4ED4-B3E1-4D2E38995D5D</string>
+		</dict>
+		<key>90CB18F0-DA09-4719-B978-F52AE51C14F9</key>
+		<dict>
+			<key>from</key>
+			<string>9A260B57-87F2-4CCB-9B51-F724AEF9C61F - 9A260B57-87F2-4CCB-9B51-F724AEF9C61F</string>
+			<key>to</key>
+			<string>785579D9-7841-476B-9834-D6476CBFE334 - 785579D9-7841-476B-9834-D6476CBFE334</string>
 		</dict>
 	</dict>
 	<key>workflowMetaData</key>
