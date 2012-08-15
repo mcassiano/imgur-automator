@@ -8,8 +8,3 @@ You can get your api key here: https://imgur.com/register/api_anon
 You can also request a api key for your gallery, just look it up (you have to use OAuth for that).
 
 Enjoy! :)
-
-Dependencies
-======
-
-You'll need pycurl (acctually, I'm planning to rewrite this without pycurl)
